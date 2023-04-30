@@ -42,6 +42,50 @@ aside {
 main {
     grid-area: main;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+table {
+    font-family: 'Alice', serif;
+    width: 100%;
+    margin: 1rem;
+}
+
+th {
+    background-color: lightgray;
+    font-size: 20px;
+    padding: 5px;
+}
+
+td {
+    background-color: #eee;
+    padding: 5px;
+}
+
+td:nth-child(1) {
+    text-align: end;
+}
+
+th:nth-child(2) {
+    width: 35%;
+}
+
+th:nth-child(3) {
+    width: 25%;
+}
+
+td:nth-child(4) {
+    text-align: end;
+}
+
+td:nth-child(5) {
+    text-align: center;
+}
+
+td:nth-child(6) {
+    text-align: end;
 }
 
 footer {

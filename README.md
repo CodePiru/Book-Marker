@@ -19,6 +19,6 @@ To acomplish that I'll have to:
 
 Some extra features:
 
-- [ ] Add a time stamp for when the books were added to the table
+- [ ] Add a time stamp for when the books were added to the table which will serve as an **id** for each book
 - [ ] The option to sort the table for each property in ascendent or descendent order
 - [ ] The option to filter only the read or unread books
