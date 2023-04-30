@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Alice&family=Bruno+Ace+SC&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 100px 1fr 50px;
+    grid-template-areas: 
+        'header header'
+        'aside  main  '
+        'footer footer';
+}
+
+header {
+    grid-area: header;
+    border: 1px solid black;
+    font-family: 'Bruno Ace SC', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    height: 80%;
+    width: auto;
+    margin-left: 2rem;
+}
+
+h1 {
+    margin-left: 1rem;
+}
+
+aside {
+    grid-area: aside;
+    border: 1px solid black;
+}
+
+main {
+    grid-area: main;
+    border: 1px solid black;
+}
+
+footer {
+    grid-area: footer;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+#github {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Alice', serif;
+    text-decoration: none;
+    color: black;
+}
+
+#github > img {
+    height: 80%;
+    width: auto;
+}
