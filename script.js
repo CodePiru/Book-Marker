@@ -9,8 +9,8 @@ const inputs = document.querySelectorAll('input');
 const closeBtn = document.querySelector('#close');
 const tableHeaders = document.querySelectorAll('th');
 const showButtons = document.querySelectorAll('#filter-buttons > button');
-const booksArr = [];
-const options = {
+const booksArr = JSON.parse(localStorage.getItem('books')) || [];
+const options = JSON.parse(localStorage.getItem('options')) || {
   show: 'all',
   category: 'added',
   ascendant: false,
@@ -38,10 +38,22 @@ Book.prototype.changeReadStatus = function changeReadStatus() {
   this.read = !this.read;
 };
 
+/* I know that I shouldn't use setPrototypeOf with created
+objects, but this is the first time I use localStorage and
+the JSON object, and didn't know how else to link them,
+since the values on localStorage must be strings. */
+
+if (!(booksArr[0] instanceof Book)) {
+  booksArr.forEach((book) => {
+    Object.setPrototypeOf(book, Book.prototype);
+  });
+}
+
 function addBookToLibrary(title, author, pages, read = false) {
   booksArr.push(new Book(title, author, pages, read));
 }
 
+// Mark the active ordering on th HTML
 function activeOrder() {
   showButtons.forEach((btn) => {
     if (btn.textContent.toLowerCase() === options.show) {
@@ -95,6 +107,10 @@ function renderizeBooks() {
     tableRow.appendChild(actions);
     tableBody.appendChild(tableRow);
   });
+  const stringifiedArr = JSON.stringify(booksArr);
+  const stringifiedOpts = JSON.stringify(options);
+  localStorage.setItem('books', stringifiedArr);
+  localStorage.setItem('options', stringifiedOpts);
   addEventListeners();
 }
 
@@ -156,5 +172,5 @@ if (!booksArr.length) {
   addBookToLibrary('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 223, true);
   // To avoid repeating the same ID
   booksArr[1].added += 1;
-  renderizeBooks();
 }
+renderizeBooks();
