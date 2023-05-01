@@ -13,8 +13,34 @@
         <img src="./img/books.png" alt="Book Marker App Logo" id="logo">
         <h1>Book Marker App</h1>
     </header>
-    <aside></aside>
+    <aside>
+        <button id="show-form">+ Add new book</button>
+    </aside>
     <main>
+        <form action="">
+            <h2>Add new book</h2>
+            <div class="container">
+                <div id="form-container">
+                    <div class="form-widget form-text">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-widget form-number">
+                        <label for="pages">Pages</label>
+                        <input type="number" id="pages" name="pages" min="0" required>
+                    </div>
+                    <div class="form-widget form-text">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                    <div class="form-widget form-checkbox">
+                        <input type="checkbox" id="read" name="read">
+                        <label for="read">I've read it</label>
+                    </div>
+                </div>
+                <button>Add</button>
+            </div>
+        </form>
         <table>
             <thead>
                 <tr>

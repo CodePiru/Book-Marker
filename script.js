@@ -1,4 +1,11 @@
 const tableBody = document.querySelector('tbody');
+const showFormBtn = document.querySelector('#show-form');
+const form = document.querySelector('form');
+const inputTitle = document.querySelector('#title');
+const inputAuthor = document.querySelector('#author');
+const inputPages = document.querySelector('#pages');
+const inputRead = document.querySelector('#read');
+const inputs = document.querySelectorAll('input');
 const booksArr = [];
 
 function Book(title, author, pages, read) {
@@ -56,9 +63,9 @@ function addEventListeners() {
     btn.addEventListener('click', (e) => {
       const bookId = e.target.parentElement.parentElement.dataset.id;
       const bookIndex = booksArr.findIndex((book) => book.added == bookId);
-      if (e.target.classList.value == 'change-status') {
+      if (e.target.classList.value === 'change-status') {
         booksArr[bookIndex].changeReadStatus();
-      } else if (e.target.classList.value == 'remove-book') {
+      } else if (e.target.classList.value === 'remove-book') {
         booksArr.splice(bookIndex, 1);
       }
       renderizeBooks();
@@ -66,9 +73,24 @@ function addEventListeners() {
   });
 }
 
+showFormBtn.addEventListener('click', () => {
+  form.style.display = 'block';
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addBookToLibrary(inputTitle.value, inputAuthor.value, Number(inputPages.value), inputRead.checked);
+  renderizeBooks();
+  inputs.forEach((input) => {
+    input.value = '';
+  });
+  inputRead.checked = false;
+  form.style.display = 'none';
+});
+
 // Hard coded books
 addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295);
 addBookToLibrary('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 223, true);
 // To avoid repeating the same ID
-booksArr[1].added++;
+booksArr[1].added += 1;
 renderizeBooks();

@@ -37,20 +37,83 @@ h1 {
 aside {
     grid-area: aside;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    font-family: 'Bruno Ace SC', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    margin: 2rem;
+    background-color: lightgray;
+}
+
+button:hover {
+    background-color: #eee;
 }
 
 main {
     grid-area: main;
     border: 1px solid black;
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+form {
+    font-family: 'Alice', serif;
+    display: none;
+    width: 95%;
+    margin-top: 1rem;
+}
+
+h2 {
+    font-family: 'Bruno Ace SC', sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+#form-container {
+    display: grid;
+    margin: 1rem;
+    grid-template-columns: 500px 125px;
+    gap: 1rem;
+}
+
+.form-widget {
+    display: flex;
+    gap: 5px;
+}
+
+.form-text > label {
+    text-align: right;
+    width: 75px;
+}
+
+.form-text > input {
+    width: 100%;
+}
+
+.form-number > input {
+    width: 100%;
+}
+
+.form-checkbox {
     justify-content: center;
-    align-items: flex-start;
+}
+
+.container > button {
+    margin: 1rem
 }
 
 table {
+    margin-top: 1rem;
     font-family: 'Alice', serif;
-    width: 100%;
-    margin: 1rem;
+    width: 95%;
 }
 
 th {
@@ -77,21 +140,16 @@ th:nth-child(3) {
     width: 25%;
 }
 
-td:nth-child(5) {
-    text-align: center;
-}
-
+td:nth-child(5),
 td:nth-child(6) {
-    text-align: end;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    text-align: center;
 }
 
 td:nth-child(6) > img {
     width: 1rem;
     height: auto;
     cursor: pointer;
+    margin: 0 0.5rem;
 }
 
 
