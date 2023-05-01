@@ -64,7 +64,8 @@ td {
     padding: 5px;
 }
 
-td:nth-child(1) {
+td:nth-child(1),
+td:nth-child(4) {
     text-align: end;
 }
 
@@ -76,17 +77,23 @@ th:nth-child(3) {
     width: 25%;
 }
 
-td:nth-child(4) {
-    text-align: end;
-}
-
 td:nth-child(5) {
     text-align: center;
 }
 
 td:nth-child(6) {
     text-align: end;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
+
+td:nth-child(6) > img {
+    width: 1rem;
+    height: auto;
+    cursor: pointer;
+}
+
 
 footer {
     grid-area: footer;

@@ -19,8 +19,51 @@ Book.prototype.getReadStatusSymbol = function formatReadStatus() {
   return this.read ? '☑' : '☒';
 };
 
+Book.prototype.changeReadStatus = function changeReadStatus() {
+  this.read = !this.read;
+};
+
 function addBookToLibrary(title, author, pages, read = false) {
   booksArr.push(new Book(title, author, pages, read));
+}
+
+function renderizeBooks() {
+  tableBody.innerHTML = '';
+  booksArr.forEach((book) => {
+    const tableRow = document.createElement('tr');
+    tableRow.dataset.id = book.added;
+    function addCell(data) {
+      const cell = document.createElement('td');
+      cell.textContent = data;
+      tableRow.appendChild(cell);
+    }
+    addCell(book.getFormattedDate());
+    addCell(book.title);
+    addCell(book.author);
+    addCell(book.pages);
+    addCell(book.getReadStatusSymbol());
+    const actions = document.createElement('td');
+    actions.innerHTML = '<img src="./img/eye.png" title="Change read status" class="change-status"><img src="./img/trash.png" title="Remove Book" class="remove-book">';
+    tableRow.appendChild(actions);
+    tableBody.appendChild(tableRow);
+  });
+  addEventListeners();
+}
+
+function addEventListeners() {
+  const actionButtons = document.querySelectorAll('td:nth-child(6) > img');
+  actionButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const bookId = e.target.parentElement.parentElement.dataset.id;
+      const bookIndex = booksArr.findIndex((book) => book.added == bookId);
+      if (e.target.classList.value == 'change-status') {
+        booksArr[bookIndex].changeReadStatus();
+      } else if (e.target.classList.value == 'remove-book') {
+        booksArr.splice(bookIndex, 1);
+      }
+      renderizeBooks();
+    });
+  });
 }
 
 // Hard coded books
@@ -28,21 +71,4 @@ addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295);
 addBookToLibrary('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 223, true);
 // To avoid repeating the same ID
 booksArr[1].added++;
-
-booksArr.forEach((book) => {
-  const tableRow = document.createElement('tr');
-  tableRow.dataset.id = book.added;
-
-  function addCell(data) {
-    const cell = document.createElement('td');
-    cell.textContent = data;
-    tableRow.appendChild(cell);
-  }
-
-  addCell(book.getFormattedDate());
-  addCell(book.title);
-  addCell(book.author);
-  addCell(book.pages);
-  addCell(book.getReadStatusSymbol());
-  tableBody.appendChild(tableRow);
-});
+renderizeBooks();
