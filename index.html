@@ -15,6 +15,13 @@
     </header>
     <aside>
         <button id="show-form">+ Add new book</button>
+        <div id="filter-buttons">
+            <h3>Show:</h3>
+            <button>All</button>
+            <button>Read</button>
+            <button>Unread</button>
+        </div>
+        <p>Click on the headers to sort for an specific category in ascendant order, or ctrl+click for descendant order.</p>
     </aside>
     <main>
         <form action="">
@@ -38,7 +45,10 @@
                         <label for="read">I've read it</label>
                     </div>
                 </div>
-                <button>Add</button>
+                <div id="form-buttons">
+                    <button id="close" type="reset">X</button>
+                    <button>Add</button>
+                </div>
             </div>
         </form>
         <table>

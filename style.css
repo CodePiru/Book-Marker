@@ -50,7 +50,29 @@ button {
 }
 
 button:hover {
-    background-color: #eee;
+    background-color: #eff;
+}
+
+#filter-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+#filter-buttons > h3 {
+    margin: 1rem;
+}
+
+#filter-buttons > button {
+    margin: 1rem 2rem;
+}
+
+#filter-buttons > .active {
+    background-color: #eff;
+}
+
+aside p {
+    padding: 1rem;
+    margin-top: 2rem;
 }
 
 main {
@@ -106,8 +128,21 @@ h2 {
     justify-content: center;
 }
 
-.container > button {
-    margin: 1rem
+#form-buttons > button {
+    margin: 0rem
+}
+
+#form-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#close {
+    padding: 0;
+    margin: 0;
+    align-self: flex-end;
+    font-size: 0.75rem;
 }
 
 table {
@@ -122,6 +157,20 @@ th {
     padding: 5px;
 }
 
+th.asc::after {
+    content: ' ▼';
+    color: gray;
+}
+
+th.des::after {
+    content: ' ▲';
+    color: gray;
+}
+
+th:nth-child(-n+4) {
+    cursor: pointer;
+}
+
 td {
     background-color: #eee;
     padding: 5px;
@@ -130,6 +179,7 @@ td {
 td:nth-child(1),
 td:nth-child(4) {
     text-align: end;
+    width: 12%;
 }
 
 th:nth-child(2) {
@@ -151,7 +201,6 @@ td:nth-child(6) > img {
     cursor: pointer;
     margin: 0 0.5rem;
 }
-
 
 footer {
     grid-area: footer;

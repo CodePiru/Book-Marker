@@ -6,7 +6,7 @@ In this project I'll have to create a library app that can:
 - [x] Show some related info from each book
 - [x] Mark them as read 
 - [x] Remove them from the app
-- [ ] Add new books with a form
+- [x] Add new books with a form
 
 To acomplish that I'll have to:
 
@@ -21,5 +21,6 @@ To acomplish that I'll have to:
 Some extra features:
 
 - [x] Add a time stamp for when the books were added to the table which will serve as an **id** for each book
-- [ ] The option to sort the table for each property in ascendent or descendent order
-- [ ] The option to filter only the read or unread books
+- [x] The option to sort the table for each property in ascendent or descendent order
+- [x] The option to filter only the read or unread books
+- [ ] *Use localStorage to save options object and booksArray*

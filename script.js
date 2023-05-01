@@ -6,7 +6,15 @@ const inputAuthor = document.querySelector('#author');
 const inputPages = document.querySelector('#pages');
 const inputRead = document.querySelector('#read');
 const inputs = document.querySelectorAll('input');
+const closeBtn = document.querySelector('#close');
+const tableHeaders = document.querySelectorAll('th');
+const showButtons = document.querySelectorAll('#filter-buttons > button');
 const booksArr = [];
+const options = {
+  show: 'all',
+  category: 'added',
+  ascendant: false,
+};
 
 function Book(title, author, pages, read) {
   // Time stamp, will alse serve as the book ID
@@ -34,9 +42,42 @@ function addBookToLibrary(title, author, pages, read = false) {
   booksArr.push(new Book(title, author, pages, read));
 }
 
+function activeOrder() {
+  showButtons.forEach((btn) => {
+    if (btn.textContent.toLowerCase() === options.show) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  tableHeaders.forEach((header) => {
+    if (header.textContent.toLowerCase() === options.category) {
+      header.classList.remove(...header.classList);
+      header.classList.add(options.ascendant ? 'asc' : 'des');
+    } else {
+      header.classList.remove('asc', 'des');
+    }
+  });
+}
+
+function sortBooks() {
+  activeOrder();
+  let filteredBooksArr = [...booksArr];
+  if (options.show !== 'all') {
+    filteredBooksArr = booksArr.filter((book) => (options.show === 'read' ? book.read : !book.read));
+  }
+  return filteredBooksArr.sort((a, b) => {
+    if (a[options.category] > b[options.category]) {
+      return options.ascendant ? 1 : -1;
+    }
+    return options.ascendant ? -1 : 1;
+  });
+}
+
 function renderizeBooks() {
   tableBody.innerHTML = '';
-  booksArr.forEach((book) => {
+  const sortedBooksArr = sortBooks();
+  sortedBooksArr.forEach((book) => {
     const tableRow = document.createElement('tr');
     tableRow.dataset.id = book.added;
     function addCell(data) {
@@ -77,6 +118,10 @@ showFormBtn.addEventListener('click', () => {
   form.style.display = 'block';
 });
 
+closeBtn.addEventListener('click', () => {
+  form.style.display = 'none';
+});
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   addBookToLibrary(inputTitle.value, inputAuthor.value, Number(inputPages.value), inputRead.checked);
@@ -88,9 +133,28 @@ form.addEventListener('submit', (e) => {
   form.style.display = 'none';
 });
 
+tableHeaders.forEach((header, idx) => {
+  if (idx <= 3) {
+    header.addEventListener('click', (e) => {
+      options.category = e.target.textContent.toLowerCase();
+      options.ascendant = !e.ctrlKey;
+      renderizeBooks();
+    });
+  }
+});
+
+showButtons.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    options.show = e.target.textContent.toLowerCase();
+    renderizeBooks();
+  });
+});
+
 // Hard coded books
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295);
-addBookToLibrary('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 223, true);
-// To avoid repeating the same ID
-booksArr[1].added += 1;
-renderizeBooks();
+if (!booksArr.length) {
+  addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295);
+  addBookToLibrary('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 223, true);
+  // To avoid repeating the same ID
+  booksArr[1].added += 1;
+  renderizeBooks();
+}
